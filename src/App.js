@@ -1,31 +1,37 @@
 import "./App.css";
 import Cars from "./api/cars.json";
 import Car_details from "./components/Car_details";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 function App() {
-  const ref = useRef(null);
-  const scrollRight = () => {
-    ref.scrollX += 40;
+  let scrl = useRef(null);
+  const [scrollX, setscrollX] = useState(0);
+  const slide = (shift) => {
+    scrl.current.scrollLeft += shift;
+    setscrollX(scrollX + shift);
+  };
+
+  const scrollCheck = () => {
+    setscrollX(scrl.current.scrollLeft);
   };
   return (
     <>
-      <div className="app">
+      <div className="app" ref={scrl} onScroll={scrollCheck}>
         {Cars.map((item) => (
           <Car_details
-            id={item.id}
+            key={item.id}
             type={item.bodyType}
             name={item.modelName}
             modelType={item.modelType}
-            image={item.imageUrl}
+            carImage={item.imageUrl}
           />
         ))}
       </div>
       <div className="app-btn_container">
-        <button className="left-btn button">
+        <button className="left-btn button" onClick={() => slide(-400)}>
           <img src="./images/chevron-circled.svg" alt="Right Button" />
         </button>
-        <button onClick={scrollRight} className="right-btn button">
+        <button className="right-btn button" onClick={() => slide(+400)}>
           <img src="./images/chevron-circled.svg" alt="Left Button" />
         </button>
       </div>
