@@ -9,7 +9,6 @@
 .app-btn_container {
   position: fixed;
   right: 20px;
-  bottom: 200px;
 }
 .button {
   height: 70px;
@@ -41,8 +40,6 @@
 .car {
   margin-inline: 10px;
   display: flex;
-  /* overflow-x: scroll;
-  scroll-behavior: smooth; */
 }
 
 .car-type {
